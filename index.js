@@ -4,7 +4,7 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const app = express()
-const port = https://lit-gorge-31021.herokuapp.com/
+const port = process.env.PORT || 3000
 
 //connection to database
 const mongoose = require('mongoose');

@@ -1,12 +1,12 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/users');
-const config = require('../config/database');
+// const config = require('../config/database');
 
 module.exports = function(passport) {
   let opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
-  opts.secretOrKey = config.database;
+  opts.secretOrKey = process.env.MONGODB_URL;
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
     User.getUserById(jwt_payload.data._id, (err, user) => {
       if(err) {

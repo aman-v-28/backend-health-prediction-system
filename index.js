@@ -8,9 +8,9 @@ const port = process.env.PORT || 3000
 
 //connection to database
 const mongoose = require('mongoose');
-const config = require('./config/database');
+// const config = require('./config/database');
 
-mongoose.connect(config.database, { 
+mongoose.connect(process.env.MONGODB_URL, { 
   useUnifiedTopology: true
 });
 mongoose.connection.on('connected', () => {

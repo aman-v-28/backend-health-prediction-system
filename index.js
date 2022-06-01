@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
-var session = require('cookie-session');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -27,15 +28,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // Passport Middleware
+// app.use(session({
+//   cookie:{
+//     secure: true,
+//     maxAge:60000
+//   },
+//   store: new RedisStore(),   
+//   resave: false,
+//   saveUninitialized: true,
+//   secret: 'SECRET' 
+// }));
 app.use(session({
-  cookie:{
-    secure: true,
-    maxAge:60000
-  },
-  store: new RedisStore(),   
-  resave: false,
-  saveUninitialized: true,
-  secret: 'SECRET' 
+  secret: 'foo',
+  store: new MongoStore(options)
 }));
 
 app.use(passport.initialize());

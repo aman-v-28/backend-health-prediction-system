@@ -39,8 +39,12 @@ app.use(cors());
 //   secret: 'SECRET' 
 // }));
 app.use(session({
-  secret: 'foo',
-  store: new MongoStore(options)
+  secret: 'SECRET',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URL
+  })
 }));
 
 app.use(passport.initialize());

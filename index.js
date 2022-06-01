@@ -1,3 +1,4 @@
+const port = process.env.PORT || 3000
 const express = require("express");
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -5,11 +6,9 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const app = express()
-const port = process.env.PORT || 3000
 
 //connection to database
 const mongoose = require('mongoose');
-// const config = require('./config/database');
 
 mongoose.connect(process.env.MONGODB_URL, { 
   useUnifiedTopology: true

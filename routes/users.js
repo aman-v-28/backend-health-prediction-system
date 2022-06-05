@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/users');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const config = require('../config/database');
 
 //register
 router.post('/register', (req, res, next) => {
@@ -53,7 +52,7 @@ router.post('/authenticate', (req, res, next) => {
       User.comparePassword(password, user.password, (err, isMatch) => {
         if(err) throw err;
         if(isMatch) {
-          const token = jwt.sign({data: user}, config.database, {
+          const token = jwt.sign({data: user}, process.env.MONGODB_URL, {
             expiresIn: 604800 // 1 week
           });
           res.json({
